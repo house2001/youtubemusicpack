@@ -13,6 +13,7 @@ pack.addNetworkDomain("googleapis.com");
 pack.setUserAuthentication({
   type: coda.AuthenticationType.HeaderBearerToken,
   instructionsUrl: "https://github.com/house2001/youtubemusicpack#authentication",
+  networkDomain: "googleapis.com",
   getConnectionName: async function (context) {
     return "YouTube Music";
   },
@@ -228,7 +229,7 @@ pack.addSyncTable({
 pack.addSyncTable({
   name: "PlaylistVideos",
   description: "Sync videos from a specific playlist",
-  identityName: "Song",
+  identityName: "PlaylistVideo",
   schema: SongSchema,
   formula: {
     name: "SyncPlaylistVideos",
@@ -279,8 +280,8 @@ pack.addSyncTable({
 
 pack.addSyncTable({
   name: "LikedVideos",
-  description: "Sync your liked videos (requires special playlist ID)",
-  identityName: "Song",
+  description: "Sync your liked videos",
+  identityName: "LikedVideo",
   schema: SongSchema,
   formula: {
     name: "SyncLikedVideos",
