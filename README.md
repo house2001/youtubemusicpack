@@ -53,7 +53,7 @@ A comprehensive Coda Pack for YouTube Music that goes beyond Spotify's capabilit
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/youtubemusicpack.git
+   git clone https://github.com/house2001/youtubemusicpack.git
    cd youtubemusicpack
    ```
 
@@ -202,7 +202,7 @@ MIT License - see LICENSE file for details
 
 ## Support
 
-For issues and feature requests, please use the [GitHub Issues](https://github.com/YOUR_USERNAME/youtubemusicpack/issues) page.
+For issues and feature requests, please use the [GitHub Issues](https://github.com/house2001/youtubemusicpack/issues) page.
 
 ## Roadmap
 

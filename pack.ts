@@ -12,7 +12,7 @@ pack.addNetworkDomain("googleapis.com");
 
 pack.setUserAuthentication({
   type: coda.AuthenticationType.HeaderBearerToken,
-  instructionsUrl: "https://github.com/YOUR_USERNAME/youtubemusicpack#authentication",
+  instructionsUrl: "https://github.com/house2001/youtubemusicpack#authentication",
   getConnectionName: async function (context) {
     return "YouTube Music";
   },
