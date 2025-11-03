@@ -342,6 +342,50 @@ pack.addSyncTable({
   },
 });
 
+pack.addSyncTable({
+  name: "Subscriptions",
+  description: "Sync your YouTube channel subscriptions",
+  identityName: "Subscription",
+  schema: ChannelSchema,
+  formula: {
+    name: "SyncSubscriptions",
+    description: "Syncs your subscribed channels",
+    parameters: [],
+    execute: async function ([], context) {
+      const response = await makeYouTubeRequest(context, "subscriptions", {
+        part: "snippet",
+        mine: "true",
+        maxResults: "50",
+      });
+
+      const channelIds = response.items?.map((item: any) => item.snippet.resourceId.channelId).join(",");
+
+      if (!channelIds) {
+        return { result: [] };
+      }
+
+      const channelsResponse = await makeYouTubeRequest(context, "channels", {
+        part: "snippet,statistics",
+        id: channelIds,
+      });
+
+      const channels = channelsResponse.items?.map((item: any) => ({
+        channelId: item.id,
+        title: item.snippet.title,
+        description: item.snippet.description,
+        subscriberCount: parseInt(item.statistics?.subscriberCount || "0"),
+        videoCount: parseInt(item.statistics?.videoCount || "0"),
+        thumbnailUrl: getThumbnailUrl(item.snippet.thumbnails),
+        url: `https://music.youtube.com/channel/${item.id}`,
+      })) || [];
+
+      return {
+        result: channels,
+      };
+    },
+  },
+});
+
 // ===========================
 // FORMULAS - SEARCH
 // ===========================
@@ -611,6 +655,35 @@ pack.addFormula({
       thumbnailUrl: getThumbnailUrl(item.snippet.thumbnails),
       channelTitle: item.snippet.channelTitle,
       url: `https://music.youtube.com/playlist?list=${item.id}`,
+    };
+  },
+});
+
+pack.addFormula({
+  name: "GetMyChannel",
+  description: "Get your own YouTube channel information",
+  parameters: [],
+  resultType: coda.ValueType.Object,
+  schema: ChannelSchema,
+  execute: async function ([], context) {
+    const response = await makeYouTubeRequest(context, "channels", {
+      part: "snippet,statistics",
+      mine: "true",
+    });
+
+    const item = response.items?.[0];
+    if (!item) {
+      throw new coda.UserVisibleError("Could not find your channel");
+    }
+
+    return {
+      channelId: item.id,
+      title: item.snippet.title,
+      description: item.snippet.description,
+      subscriberCount: parseInt(item.statistics?.subscriberCount || "0"),
+      videoCount: parseInt(item.statistics?.videoCount || "0"),
+      thumbnailUrl: getThumbnailUrl(item.snippet.thumbnails),
+      url: `https://music.youtube.com/channel/${item.id}`,
     };
   },
 });
