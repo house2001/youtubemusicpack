@@ -318,7 +318,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-**Made with [Claude Code](https://claude.com/claude-code) by Michael Schaaf**
+**Created by Michael Schaaf**
 
 ## Roadmap
 
