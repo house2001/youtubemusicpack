@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logo Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        #preview {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            background: #f5f5f5;
+        }
+        button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #0052a3;
+        }
+    </style>
+</head>
+<body>
+    <h1>YouTube Music Pack Logo</h1>
+
+    <div id="preview">
+        <img src="logo.svg" width="120" height="120" id="logoImg">
+    </div>
+
+    <p>Right-click the logo above and select "Save Image As..." to save as PNG.</p>
+
+    <p><strong>Or use this button:</strong></p>
+    <button onclick="downloadPNG()">Download as PNG (120x120)</button>
+
+    <script>
+        function downloadPNG() {
+            const svg = document.getElementById('logoImg');
+            const canvas = document.createElement('canvas');
+            canvas.width = 120;
+            canvas.height = 120;
+            const ctx = canvas.getContext('2d');
+
+            const img = new Image();
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0, 120, 120);
+                canvas.toBlob(function(blob) {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'youtube-music-pack-logo.png';
+                    a.click();
+                    URL.revokeObjectURL(url);
+                });
+            };
+            img.src = 'logo.svg';
+        }
+    </script>
+
+    <hr>
+
+    <h2>Installation Instructions:</h2>
+    <ol>
+        <li>Open this file in your browser: <code>file:///Users/mschaaf/code/youtubemusicpack/convert_logo.html</code></li>
+        <li>Click "Download as PNG (120x120)"</li>
+        <li>Go to <a href="https://coda.io/p/45945" target="_blank">your pack settings</a></li>
+        <li>Click "Settings" → "Branding"</li>
+        <li>Upload the PNG file as your pack logo</li>
+    </ol>
+</body>
+</html>

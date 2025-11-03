@@ -4,7 +4,7 @@
   "shortDescription": "Superhuman YouTube Music agent for Coda with AI recommendations and advanced features",
   "description": "A comprehensive YouTube Music Pack with AI-powered recommendations, playlist analysis, duplicate detection, trending music, and more. Goes beyond traditional music packs with superhuman agent capabilities.",
   "version": "1.0.0",
-  "logoPath": null,
+  "logoPath": "logo.svg",
   "exampleImages": [],
   "category": "Entertainment",
   "supportEmail": "support@example.com",
