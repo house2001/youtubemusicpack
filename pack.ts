@@ -9,8 +9,17 @@ export const pack = coda.newPack();
 pack.addNetworkDomain("googleapis.com");
 
 pack.setUserAuthentication({
-  type: coda.AuthenticationType.HeaderBearerToken,
-  instructionsUrl: "https://github.com/house2001/youtubemusicpack#authentication",
+  type: coda.AuthenticationType.OAuth2,
+  authorizationUrl: "https://accounts.google.com/o/oauth2/v2/auth",
+  tokenUrl: "https://oauth2.googleapis.com/token",
+  scopes: [
+    "https://www.googleapis.com/auth/youtube.readonly",
+    "https://www.googleapis.com/auth/youtube",
+  ],
+  additionalParams: {
+    access_type: "offline",
+    prompt: "consent",
+  },
   networkDomain: "googleapis.com",
   getConnectionName: async function (context) {
     return "YouTube Music";
