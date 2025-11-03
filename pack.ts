@@ -6,8 +6,6 @@ export const pack = coda.newPack();
 // PACK METADATA
 // ===========================
 
-pack.addNetworkDomain("music.youtube.com");
-pack.addNetworkDomain("youtube.com");
 pack.addNetworkDomain("googleapis.com");
 
 pack.setUserAuthentication({
