@@ -1,2 +1,5 @@
 .coda.json
 .coda-credentials.json
+FINAL_CONFIG.txt
+oauth_credentials.txt
+*.secret
