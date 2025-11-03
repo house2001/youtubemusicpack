@@ -992,6 +992,76 @@ pack.addFormula({
 });
 
 // ===========================
+// PLAYBACK HELPER FORMULAS
+// ===========================
+
+pack.addFormula({
+  name: "GetPlayURL",
+  description: "Get a direct URL to play a video in YouTube Music",
+  parameters: [
+    coda.makeParameter({
+      type: coda.ParameterType.String,
+      name: "videoId",
+      description: "Video ID to play",
+    }),
+    coda.makeParameter({
+      type: coda.ParameterType.Boolean,
+      name: "autoplay",
+      description: "Start playing automatically (default: true)",
+      optional: true,
+    }),
+  ],
+  resultType: coda.ValueType.String,
+  codaType: coda.ValueHintType.Url,
+  execute: async function ([videoId, autoplay = true], context) {
+    const autoplayParam = autoplay ? "&autoplay=1" : "";
+    return `https://music.youtube.com/watch?v=${videoId}${autoplayParam}`;
+  },
+});
+
+pack.addFormula({
+  name: "GetPlaylistURL",
+  description: "Get a direct URL to play a playlist in YouTube Music",
+  parameters: [
+    coda.makeParameter({
+      type: coda.ParameterType.String,
+      name: "playlistId",
+      description: "Playlist ID to play",
+    }),
+    coda.makeParameter({
+      type: coda.ParameterType.Boolean,
+      name: "autoplay",
+      description: "Start playing automatically (default: true)",
+      optional: true,
+    }),
+  ],
+  resultType: coda.ValueType.String,
+  codaType: coda.ValueHintType.Url,
+  execute: async function ([playlistId, autoplay = true], context) {
+    const autoplayParam = autoplay ? "&autoplay=1" : "";
+    return `https://music.youtube.com/playlist?list=${playlistId}${autoplayParam}`;
+  },
+});
+
+pack.addFormula({
+  name: "OpenAndPlay",
+  description: "Action to open and play a video in YouTube Music (opens in browser)",
+  parameters: [
+    coda.makeParameter({
+      type: coda.ParameterType.String,
+      name: "videoId",
+      description: "Video ID to play",
+    }),
+  ],
+  resultType: coda.ValueType.String,
+  isAction: true,
+  execute: async function ([videoId], context) {
+    const url = `https://music.youtube.com/watch?v=${videoId}&autoplay=1`;
+    return `Open this URL to play: ${url}`;
+  },
+});
+
+// ===========================
 // COLUMN FORMATS
 // ===========================
 
