@@ -246,9 +246,15 @@ pack.addSyncTable({
         type: coda.ParameterType.String,
         name: "playlistId",
         description: "The playlist ID to sync videos from",
+        optional: true,
       }),
     ],
     execute: async function ([playlistId], context) {
+      // If no playlistId provided (e.g., during connection testing), return empty
+      if (!playlistId) {
+        return { result: [] };
+      }
+
       const response = await makeYouTubeRequest(context, "playlistItems", {
         part: "snippet,contentDetails",
         playlistId: playlistId,
