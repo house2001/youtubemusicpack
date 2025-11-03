@@ -190,6 +190,12 @@ To increase your quota, apply for higher limits in Google Cloud Console.
 - The video might be private or deleted
 - Some videos may not be accessible in your region
 
+## Legal
+
+- [Privacy Policy](PRIVACY_POLICY.md)
+- [Terms of Service](TERMS_OF_SERVICE.md)
+- [MIT License](LICENSE)
+
 ## License
 
 MIT License - see LICENSE file for details
